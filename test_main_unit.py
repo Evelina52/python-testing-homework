@@ -1,0 +1,19 @@
+import unittest
+from main import calculate_average
+
+class TestCalculateAverage(unittest.TestCase):
+    
+    def test_empty_list(self):
+        self.assertIsNone(calculate_average([]))
+        
+    def test_positive_numbers(self):
+        self.assertEqual(calculate_average([1, 2, 3, 4, 5]), 3)
+        
+    def test_negative_numbers(self):
+        self.assertEqual(calculate_average([-1, -2, -3]), -2)
+        
+    def test_mixed_numbers(self):
+        self.assertEqual(calculate_average([-1, 0, 1]), 0)
+
+if __name__ == '__main__':
+    unittest.main()

@@ -1,0 +1,38 @@
+name: Запуск тестов
+
+on: [push] 
+
+jobs:
+  unittest:
+    name: Запуск UnitTest
+    runs-on: ubuntu-latest 
+    
+    steps:
+      - uses: actions/checkout@v3  
+      
+      - name: Установить Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10' 
+      
+      - name: Запустить тесты
+        run: python -m unittest test_main_unit.py
+
+  pytest:
+    name: Запуск PyTest
+    needs: unittest  
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Установить Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      
+      - name: Установить зависимости
+        run: pip install pytest
+      
+      - name: Запустить тесты
+        run: pytest test_main_pytest.py -v 
